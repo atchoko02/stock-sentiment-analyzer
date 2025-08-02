@@ -21,6 +21,7 @@ def fetch_reddit_posts(ticker: str, company_name: str, limit: int = 100):
             posts.append({
                 'title': post.title,
                 'url': post.url,
+                'Date': post.created_utc,
                 'text': post.selftext,
                 'score': post.score,
                 'subreddit': sub

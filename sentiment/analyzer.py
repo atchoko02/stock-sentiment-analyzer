@@ -33,12 +33,11 @@ def analyze_sentiment(posts: list[dict]):
     df['cleaned_text'] = (df['title'] + ' ' + df['text']).apply(clean_text)
     df['sentiment_score'] = df['cleaned_text'].apply(get_sentiment_score)
     df['sentiment_label'] = df['sentiment_score'].apply(classify_sentiment) 
-    df['date'] = df['date'].apply(lambda ts: datetime.fromtimestamp(ts, tz=timezone.utc).date())
+    df['Date'] = df['Date'].apply(lambda ts: datetime.fromtimestamp(ts, tz=timezone.utc).date())
 
-    sentiment_daily = df.groupby('date').agg({
+    sentiment_daily = df.groupby('Date').agg({
         'score': 'mean'
     }).reset_index()
     sentiment_daily.rename(columns={'score': 'sentiment_score', 'date': 'Date'})
     return sentiment_daily
 
-def 
